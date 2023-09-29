@@ -135,8 +135,8 @@ _How many regions have more than 50 tourist attraction in the data set? (Hint: Y
 
 ```{r Ex_g}
 visitors %>% 
-filter(region) %>%
-filter(attraction>=50)
+count(region) %>%
+filter(n>=50)
 ```
 
 
@@ -161,11 +161,11 @@ visitors %>%
 _Perform the same calculation for the 2021 admissions data._
 
 ```{r Ex_h}
-#visitors %>% 
-#  ______(
-#    __________,
-#    __________
-#  )
+visitors %>% 
+summarise(
+mean_2021 = mean(n_2021, na.rm = TRUE),
+med_2021 = median(n_2021, na.rm = TRUE)
+)
 ```
 
 All values in the output are `NA`!
@@ -174,7 +174,7 @@ All values in the output are `NA`!
 
 _What does `NA` stand for and why are you getting this as your answer to the previous question._
 
-**Write your answer here**
+Not available, because there is no data provided for some attractions in 2021 
 
 
 
@@ -183,15 +183,17 @@ _What does `NA` stand for and why are you getting this as your answer to the pre
 
 _Look at the help pages for the `mean()` and `median()` commands to see what the input argument `na.rm` does. Edit your code from exercise h so that it computes the summary statistics where data is available._
 
-**Write your answer here**
-
-
+visitors %>% 
+summarise(
+mean_2021 = mean(n_2021, na.rm = TRUE),
+med_2021 = median(n_2021, na.rm = TRUE)
+)
 
 
 ## Question 7
 
 _Which setting (inside, outside or mixed) has the largest mean visitor numbers in 2022?_
-
+Inside
 ```{r Q7}
 visitors %>% 
   group_by(setting) %>%
@@ -205,7 +207,7 @@ visitors %>%
 
 _Observe in question 6 that the mean statistics across all settings are much larger than the corresponding median statistics. Discuss in your group what this suggests about the data._
 
-**Write your answer here**
+The data is not evenly spread across the settings but instead a few large values have skewed the value of the mean so that it is much larger than the median of the data. 
 
 
 
@@ -238,8 +240,8 @@ _How many tourist attractions are there in each of the 4 nations? From this, dis
 
 
 ```{r Ex_l}
-#________ %>%
-#  ______(_______)
+visitors_with_nations %>%
+count(nations)
 ```
 
 
